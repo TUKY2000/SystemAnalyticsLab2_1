@@ -1,9 +1,21 @@
 import numpy as np
 
+class Functional:
+    '''
+    class describes square funcеional of management quality \n
+    I = 0.5 * integral{tr(x(t))*S(t)*x(t) + tr(u(t))*Q(t)*u(t)} + 0.5 * tr(x(t1))*pi*x(t1)
+    '''
+    def __init__(self, matrixS : list, matrixQ : list, matrixPi : list,):
+        self.mS = np.matrix(matrixS)
+        self.mQ = np.matrix(matrixQ)
+        self.mPi = np.matrix(matrixPi)
+
+
+
 class LinStatSystem:
     '''
-    Linear stacionary system can be described by math equations
-    x'(t) = A(t)*x(t) + B(t)*u(t),
+    Linear stacionary system can be described by math equations \n
+    x'(t) = A(t)*x(t) + B(t)*u(t), \n
     y(t) = C(t)*x(t), x(t_0) = x_0
     '''
 
