@@ -1,0 +1,18 @@
+QPushButton{
+    color: balck;
+    background: transparent;
+    max-height: 30px;
+    max-width: 30px;
+    margin: 0px;
+    padding: 0px;
+    font: 24px "MS Shell Dlg 2";
+}
+QPushButton:pressed{
+    color: red;
+    background: transparent;
+    max-height: 30px;
+    max-width: 30px;
+    margin: 0px;
+    padding: 0px;
+    font: 24px "MS Shell Dlg 2";
+}
