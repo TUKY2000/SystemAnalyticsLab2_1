@@ -2,14 +2,17 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class InputLabelWidget(QtWidgets.QWidget):
     def __init__(self):
+        super(InputLabelWidget, self).__init__()
+
         # create Labels : as items in list
         self.labelList = []
         # create PushButtons : as items in list
         self.buttonsList = []
         # create layout
-        self.layout = QtWidgets.QHBoxLayout()
+        #self.layout = QtWidgets.QHBoxLayout()
         # customize labels
         # customize buttons
+        #self.setLayout(self.layout)
 
     def cusomizeWidget(self, filePath, widgets : list):
         '''
@@ -23,6 +26,8 @@ class InputLabelWidget(QtWidgets.QWidget):
 
 class LssInputLabel(InputLabelWidget):
     def __init__(self):
+        super(LssInputLabel, self).__init__()
+
         # set label list
         self.labelList.append(QtWidgets.QLabel('x\'(t) = '))
         self.labelList.append(QtWidgets.QLabel('(t)*x(t) + '))
@@ -31,12 +36,20 @@ class LssInputLabel(InputLabelWidget):
         # set button list
         self.buttonsList.append(QtWidgets.QPushButton('A'))
         self.buttonsList.append(QtWidgets.QPushButton('B'))
-        self.cusomizeWidget('./StyleSheets/InputButtons.css', self.buttonsList)
+        self.cusomizeWidget('src\View\StyleSheets\InputButtons.css', self.buttonsList)
 
         # layout combining
-        self.layout.addWidget(self.labelList[1])
-        self.layout.addWidget(self.buttonList[1])
-        self.layout.addWidget(self.labelList[2])
-        self.layout.addWidget(self.buttonList[2])
-        self.layout.addWidget(self.labelList[3])
-        self.layout.addWidget(QtWidgets.QLayoutItem.QSpacerItem())
+        layout = QtWidgets.QHBoxLayout()
+        layout.addWidget(self.labelList[0])
+        layout.addWidget(self.buttonsList[0])
+        layout.addWidget(self.labelList[1])
+        layout.addWidget(self.buttonsList[1])
+        layout.addWidget(self.labelList[2])
+        layout.addItem(QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum))
+        self.setLayout(layout)
+
+
+app = QtWidgets.QApplication([])
+widget = LssInputLabel()
+widget.show()
+app.exec_()
