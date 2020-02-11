@@ -8,11 +8,6 @@ class InputLabelWidget(QtWidgets.QWidget):
         self.labelList = []
         # create PushButtons : as items in list
         self.buttonsList = []
-        # create layout
-        #self.layout = QtWidgets.QHBoxLayout()
-        # customize labels
-        # customize buttons
-        #self.setLayout(self.layout)
 
     def cusomizeWidget(self, filePath, widgets : list):
         '''
@@ -47,9 +42,3 @@ class LssInputLabel(InputLabelWidget):
         layout.addWidget(self.labelList[2])
         layout.addItem(QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum))
         self.setLayout(layout)
-
-
-app = QtWidgets.QApplication([])
-widget = LssInputLabel()
-widget.show()
-app.exec_()
