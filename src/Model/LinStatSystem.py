@@ -1,4 +1,5 @@
 import numpy as np
+import scipy as sp
 
 class Functional:
     '''
@@ -65,3 +66,14 @@ class LSSManagement(list):
         for x in arrayX:
             result.append(self.__getY(x))
         return result
+
+
+class LSSManagementOpt(LSSManagement):
+    '''
+    Generates optimal management for linear stacionar system and its quality functional
+    '''
+    def __init__(self, system : LinStatSystem, func : Functional):
+        super(LSSManagementOpt, self).__init__(self.__generate(system.mA, system.mB, func.mQ, func.mS))
+
+    def __generate(self, mA, mB, mQ, mS):
+        return np.dot(np.dot(np.linalg.inv(mQ), mB.T), sp.linalg.solve_continuous_are(mA, mB, mS, mQ))
