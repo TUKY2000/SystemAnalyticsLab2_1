@@ -11,6 +11,16 @@ class InputLabelWidget(QtWidgets.QWidget):
         # customize labels
         # customize buttons
 
+    def cusomizeWidget(self, filePath, widgets : list):
+        '''
+        set stylesheet for qt widgets 
+        '''
+        with open(filePath, 'r') as file:
+            style = file.read()
+            for item in widgets:
+                item.setStyleSheet(style)
+
+
 class LssInputLabel(InputLabelWidget):
     def __init__(self):
         # set label list
@@ -21,6 +31,7 @@ class LssInputLabel(InputLabelWidget):
         # set button list
         self.buttonsList.append(QtWidgets.QPushButton('A'))
         self.buttonsList.append(QtWidgets.QPushButton('B'))
+        self.cusomizeWidget('./StyleSheets/InputButtons.css', self.buttonsList)
 
         # layout combining
         self.layout.addWidget(self.labelList[1])
