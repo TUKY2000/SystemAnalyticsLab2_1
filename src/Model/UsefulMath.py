@@ -1,4 +1,4 @@
-def RungeKutta4(func, x0, y0, steplen, stepcount):
+def RungeKutta4(func, x0, y0, steplen, x1):
     def f1(x, y):
         return func(x, y)
 
@@ -16,6 +16,7 @@ def RungeKutta4(func, x0, y0, steplen, stepcount):
     
     X = [x0]
     Y = [y0]
+    stepcount = x1 / steplen
     for i in range(stepcount):
         X.append(X[i] + steplen)
         Y.append(__next(func, X[i], Y[i], steplen))
