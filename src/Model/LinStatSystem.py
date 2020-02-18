@@ -1,5 +1,5 @@
 import numpy as np
-import scipy as sp
+import scipy.linalg as sp
 
 class Functional:
     '''
@@ -76,4 +76,4 @@ class LSSManagementOpt(LSSManagement):
         super(LSSManagementOpt, self).__init__(self.__generate(system.mA, system.mB, func.mQ, func.mS))
 
     def __generate(self, mA, mB, mQ, mS):
-        return np.dot(np.dot(np.linalg.inv(mQ), mB.T), sp.linalg.solve_continuous_are(mA, mB, mS, mQ))
+        return np.dot(np.dot(np.linalg.inv(mQ), mB.T), sp.solve_continuous_are(mA, mB, mS, mQ))
