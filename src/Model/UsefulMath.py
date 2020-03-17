@@ -19,7 +19,7 @@ def RungeKutta4(func, x0, y0, x1, steplen):
     
     X = [x0]
     Y = [y0]
-    stepcount = x1 / steplen
+    stepcount = int((x1 - x0) / steplen)
     for i in range(stepcount):
         X.append(X[i] + steplen)
         Y.append(__next(X[i], Y[i]))
