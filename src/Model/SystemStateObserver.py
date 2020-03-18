@@ -10,13 +10,13 @@ class FullOrderObserver:
     def __init__(self, system : lss.LinStatSystem):
         self.system = system
 
-    def estimate(self, managment : list, sysreaction : list, mK : np.matrix, time):
+    def estimate(self, managment : list, sysreaction : list, mK : np.matrix, time, qper):
         def __dxdt(t, x):
             return np.dot(self.system.mA, x) +\
-                np.dot(self.system.mB, managment) +\
-                np.dot(mK, (sysreaction - np.dot(self.system.mC, x)))
+                np.dot(self.system.mB, managment[t]) +\
+                np.dot(mK, (sysreaction[t] - np.dot(self.system.mC, x)))
         
-        return usm.RungeKutta4(__dxdt, self.system.x0, 0, time, steplen = 100)
+        return usm.ModRungeKutta4(__dxdt, 0, self.system.x0, time, steplen = qper)
 
     
 
@@ -28,7 +28,7 @@ class LowOrderObserver:
     def __init__(self, system : lss.LinStatSystem):
         self.system = system
 
-    def estimate(self, managment, sysraction, matrixD, matrixK, time):
+    def estimate(self, managment, sysraction, matrixD, matrixK, time, qper):
         # 1) check input
         
         def __calcG(mD, mK):
@@ -85,7 +85,7 @@ class LowOrderObserver:
         def __dzdt(t, z):
             return np.dot(matrixD, z) + np.dot(mH, managment) + np.dot(matrixK, sysraction)
 
-        estimateZ = usm.RungeKutta4(__dzdt, self.system.x0, 0, time, steplen = 1)
+        estimateZ = usm.ModRungeKutta4(__dzdt, self.system.x0, 0, time, steplen = qper)
 
         # 4) calculate estimation x
         estimateX = np.dot(np.linalg.inv(np.append(self.system.mC, mG)),
